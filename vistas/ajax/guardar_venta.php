@@ -76,7 +76,8 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
     $sqlUsuarioACT        = mysqli_query($conexion, "select * from users inner join perfil on id_perfil = sucursal_users where id_users = '".$id_vendedor."'"); //obtener el usuario activo 1aqui1
     $rw         = mysqli_fetch_array($sqlUsuarioACT);
     $id_sucursal = $rw['sucursal_users'];
-
+    $giro=$rw['giro_empresa'];
+    $nombreu=$rw['nombre_users'].' '.$rw['apellido_users'];
     $impuestosDelProducto;
     $listaProductos = array();
     if($tipo_doc === 3)
@@ -94,7 +95,7 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
     $id_factura = mysqli_insert_id($conexion);
 
 
-    $cadena_envio="El usuario admin de la sucursal de: Corposistemas, necesita lo siguiente: \n";
+    $cadena_envio="El usuario:".$nombreu." de la sucursal de: ".$giro.", necesita lo siguiente: \n";
     while ($row = mysqli_fetch_array($sql)) {
         $id_tmp          = $row["id_tmp"];
         $id_producto     = $row['id_producto'];
@@ -250,8 +251,8 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 
 curl_close($curl);
-echo $response;
-    echo $mensaje;
+//echo $response;
+    //echo $mensaje;
     // Fin de la consulta Principal
     $subtotal         = number_format($sumador_total, 2, '.', '');
     $total_iva        = ($subtotal * $impuesto) / 100;
