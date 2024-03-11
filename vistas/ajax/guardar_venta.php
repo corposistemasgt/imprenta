@@ -94,7 +94,7 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
     $id_factura = mysqli_insert_id($conexion);
 
 
-
+    $cadena_envio="El usuario admin de la sucursal de: Corposistemas, necesita lo siguiente: \n";
     while ($row = mysqli_fetch_array($sql)) {
         $id_tmp          = $row["id_tmp"];
         $id_producto     = $row['id_producto'];
@@ -102,7 +102,7 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
         $cantidad        = $row['cantidad_tmp'];
         $desc_tmp        = $row['desc_tmp'];
         $nombre_producto = $row['nombre_producto'];
-
+        $cadena_envio.=$cantidad."  ".$nombre_producto;
         if ($row['iva_producto'] == 0) {
             //echo($tipo_doc." ----116 -tipo doc  NO ENTRAAA WHILE");
             $p_venta   = $row['precio_tmp'];
@@ -228,6 +228,29 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
         }
         $nums++;
     }
+    $curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://colegiooxford.edu.gt/wha/public/api/create-message',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => array(
+  'appkey' => '522983af-3c04-45cd-af02-3e2c23d6fcb5',
+  'authkey' => '1RRmC3TpqskyFlzUzLcuBuHUbYe1BinAoNXtuXKw0M3gQgNlPa',
+  'to' => '50257077505',
+  'message' => $cadena_envio,
+  'sandbox' => 'false'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
     echo $mensaje;
     // Fin de la consulta Principal
     $subtotal         = number_format($sumador_total, 2, '.', '');
