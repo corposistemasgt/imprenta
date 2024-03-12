@@ -102,7 +102,7 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
     {
         $giro="Pruebas";
     }
-    $cadena_envio="El usuario: ".$nombreu."  de: ".$giro.", con la orden: ".$orden." necesita lo siguiente: \n";
+    $cadena_envio="El usuario ".$nombreu."  de ".$giro.", con la orden ".$orden." necesita lo siguiente: \n";
     while ($row = mysqli_fetch_array($sql)) {
         $id_tmp          = $row["id_tmp"];
         $id_producto     = $row['id_producto'];
@@ -267,7 +267,7 @@ curl_setopt_array($curl, array(
   CURLOPT_POSTFIELDS => array(
   'appkey' => '522983af-3c04-45cd-af02-3e2c23d6fcb5',
   'authkey' => '1RRmC3TpqskyFlzUzLcuBuHUbYe1BinAoNXtuXKw0M3gQgNlPa',
-  'to' => '50257077505',
+  'to' => '50258273959',
   'message' => $cadena_envio,
   'sandbox' => 'false'
   ),
