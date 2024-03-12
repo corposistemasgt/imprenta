@@ -246,7 +246,7 @@ curl_setopt_array($curl, array(
   CURLOPT_POSTFIELDS => array(
   'appkey' => '522983af-3c04-45cd-af02-3e2c23d6fcb5',
   'authkey' => '1RRmC3TpqskyFlzUzLcuBuHUbYe1BinAoNXtuXKw0M3gQgNlPa',
-  'to' => '50257077505',
+  'to' => '50258273959',
   'message' => $cadena_envio,
   'sandbox' => 'false'
   ),
