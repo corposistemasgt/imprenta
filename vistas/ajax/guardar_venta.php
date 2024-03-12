@@ -227,6 +227,7 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
     factura_nit_cliente = '$nit_cliente', factura_direccion_cliente = '$direccion_cliente', 
     factura_numero_cliente = '$telefono_cliente',
     tipoDocumento = '$tipo_doc', totalIva = '$total_iva' ".$agregarCheque." where id_factura = '$id_factura'";
+    echo $consultaUpdate;
     $insert = mysqli_query($conexion, $consultaUpdate);    
     $idVenta = $id_factura;
     $delete = mysqli_query($conexion, "DELETE FROM tmp_ventas WHERE session_id='" .$session_id. "'");
