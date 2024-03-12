@@ -182,26 +182,7 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
         }
         $nums++;
     }
-    $curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://colegiooxford.edu.gt/wha/public/api/create-message',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS => array(
-  'appkey' => '522983af-3c04-45cd-af02-3e2c23d6fcb5',
-  'authkey' => '1RRmC3TpqskyFlzUzLcuBuHUbYe1BinAoNXtuXKw0M3gQgNlPa',
-  'to' => '50257077505',
-  'message' => $cadena_envio,
-  'sandbox' => 'false'
-  ),
-));
-$response = curl_exec($curl);
-curl_close($curl);
+   
     $subtotal         = number_format($sumador_total, 2, '.', '');
     $total_iva        = ($subtotal * $impuesto) / 100;
     $total_iva        = number_format($total_iva, 2, '.', '') - number_format($t_iva, 2, '.', '');
@@ -249,6 +230,27 @@ curl_close($curl);
     $insert = mysqli_query($conexion, $consultaUpdate);    
     $idVenta = $id_factura;
     $delete = mysqli_query($conexion, "DELETE FROM tmp_ventas WHERE session_id='" .$session_id. "'");
+   
+    $curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://colegiooxford.edu.gt/wha/public/api/create-message',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => array(
+  'appkey' => '522983af-3c04-45cd-af02-3e2c23d6fcb5',
+  'authkey' => '1RRmC3TpqskyFlzUzLcuBuHUbYe1BinAoNXtuXKw0M3gQgNlPa',
+  'to' => '50257077505',
+  'message' => $cadena_envio,
+  'sandbox' => 'false'
+  ),
+));
+$response = curl_exec($curl);
+curl_close($curl);
     if ($insert_detail) {
         echo "<script>
         $('#outer_comprobante').load('../ajax/carga_correlativos.php');
