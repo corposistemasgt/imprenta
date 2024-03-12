@@ -231,6 +231,12 @@ while($res = $query2->fetch_object()){$sucursales[] = $res;}
 															<div id="resultados6"></div><!-- Carga los datos ajax -->
 															</div>
 														</div>
+														<div class="row">
+															<div class="col-md-12">
+																		<input type="text" id="no_orden" name="no_orden" class="form-control" placeholder="Numero de Orden"  tabindex="2" required>						
+																
+															</div>
+														</div>
 														<div id="idpagos" class="row">
 															
 															<div class="col-md-5">

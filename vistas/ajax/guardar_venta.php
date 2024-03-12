@@ -31,6 +31,7 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
     $date_added     = date("Y-m-d H:i:s");
     $nombre_cliente = $_POST['nombre_cliente'];
     $direccion_cliente = $_POST['direccion_cliente'];
+    $orden = $_POST['no_orden'];
     $correo_cliente = $_POST['correo_cliente'];
     $telefono_cliente = $_POST['telefono_cliente'];
     $nit_cliente    = strtoupper(($_POST['rnc']));
@@ -80,7 +81,7 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
     $fecha_factura = date('Y-m-d H:i:s');
     $insert = mysqli_query($conexion, "INSERT INTO facturas_ventas (id_factura, numero_factura, fecha_factura, estado_factura) VALUES (NULL, '1234', '$fecha_factura', '1')");
     $id_factura = mysqli_insert_id($conexion);
-    $cadena_envio="El usuario:".$nombreu." de la sucursal de: ".$giro.", necesita lo siguiente: \n";
+    $cadena_envio="El usuario: ".$nombreu."  de: ".$giro.", con la orden: ".$orden." necesita lo siguiente: \n";
     while ($row = mysqli_fetch_array($sql)) {
         $id_tmp          = $row["id_tmp"];
         $id_producto     = $row['id_producto'];
@@ -223,7 +224,7 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
     estado_factura = '$estado', id_users_factura = '$users', 
     dinero_resibido_fac = '$resibido', id_sucursal = '$id_sucursal', 
     id_comp_factura = '$id_comp', num_trans_factura = '$trans', 
-    factura_nombre_cliente = '$nombre_cliente', 
+    factura_nombre_cliente = '$nombre_cliente', no_orden='$orden',
     factura_nit_cliente = '$nit_cliente', factura_direccion_cliente = '$direccion_cliente', 
     factura_numero_cliente = '$telefono_cliente',
     tipoDocumento = '$tipo_doc', totalIva = '$total_iva' ".$agregarCheque." where id_factura = '$id_factura'";
