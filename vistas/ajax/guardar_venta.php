@@ -67,7 +67,7 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
     $sqlUsuarioACT        = mysqli_query($conexion, "select * from users inner join perfil on id_perfil = sucursal_users where id_users = '".$id_vendedor."'"); //obtener el usuario activo 1aqui1
     $rw         = mysqli_fetch_array($sqlUsuarioACT);
     $id_sucursal = $rw['sucursal_users'];
-    $giro=$rw['giro_empresa'];
+    
     $nombreu=$rw['nombre_users'].' '.$rw['apellido_users'];
     $impuestosDelProducto;
     $listaProductos = array();
@@ -81,6 +81,27 @@ if (empty($_POST['id_cliente']) && 1 != 1) {
     $fecha_factura = date('Y-m-d H:i:s');
     $insert = mysqli_query($conexion, "INSERT INTO facturas_ventas (id_factura, numero_factura, fecha_factura, estado_factura) VALUES (NULL, '1234', '$fecha_factura', '1')");
     $id_factura = mysqli_insert_id($conexion);
+    $giro="";
+    if($id_vendedor==15)
+    {
+        $giro="Central";
+    }
+    if($id_vendedor==16)
+    {
+        $giro="Sucursal";
+    }
+    if($id_vendedor==17)
+    {
+        $giro="Artes Graficas";
+    }
+    if($id_vendedor==18)
+    {
+        $giro="Artes Graficas";
+    }
+    if($id_vendedor==1)
+    {
+        $giro="Pruebas";
+    }
     $cadena_envio="El usuario: ".$nombreu."  de: ".$giro.", con la orden: ".$orden." necesita lo siguiente: \n";
     while ($row = mysqli_fetch_array($sql)) {
         $id_tmp          = $row["id_tmp"];
@@ -246,7 +267,7 @@ curl_setopt_array($curl, array(
   CURLOPT_POSTFIELDS => array(
   'appkey' => '522983af-3c04-45cd-af02-3e2c23d6fcb5',
   'authkey' => '1RRmC3TpqskyFlzUzLcuBuHUbYe1BinAoNXtuXKw0M3gQgNlPa',
-  'to' => '50258273959',
+  'to' => '50257077505',
   'message' => $cadena_envio,
   'sandbox' => 'false'
   ),
