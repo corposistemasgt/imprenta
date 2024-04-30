@@ -49,15 +49,6 @@
   <br>
   <div>
     <?php
-/*$sql1             = mysqli_query($conexion, "select * from lineas where id_linea='" . $id_categoria . "'");
-$rw1              = mysqli_fetch_array($sql1);
-$nombre_categoria = $rw1['nombre_linea'];
-if (empty($nombre_categoria)) {
-    echo "Todos";
-} else {
-    echo $nombre_categoria;
-}*/
-//echo $consulta2;
 ?>
   </div>
   <table class="table-bordered" style="width:100%;">
@@ -94,6 +85,20 @@ while ($row = mysqli_fetch_array($query)) {
     if( strcmp($row['estado_factura'],'1')==0 )
     {
         $estado='Emitido';
+        $precio_mayorista = $row['monto_factura'];  
+   
+        $sumador_total += $precio_mayorista;  
+    }
+    if( strcmp($row['estado_factura'],'2')==0 )
+    {
+        $estado='Pendiente';
+        $precio_mayorista = $row['monto_factura'];  
+   
+        $sumador_total += $precio_mayorista;  
+    }
+    if( strcmp($row['estado_factura'],'3')==0 )
+    {
+        $estado='Anulado';
         $precio_mayorista = $row['monto_factura'];  
    
         $sumador_total += $precio_mayorista;  

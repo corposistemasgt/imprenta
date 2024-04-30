@@ -22,10 +22,9 @@ if (!empty($daterange)) {
     $fecha= " and (facturas_ventas.fecha_factura between '$fecha_inicial' and '$fecha_final' )";
 }
 
-$consulta2="SELECT * FROM facturas_ventas left join clientes on facturas_ventas.id_cliente = clientes.id_cliente 
-left join users on facturas_ventas.id_users_factura = users.id_users WHERE facturas_ventas.id_sucursal =  ".$sucusal.
-$fecha." order by 
-facturas_ventas.id_factura";
+$consulta2="SELECT * FROM facturas_ventas,users where 
+facturas_ventas.id_users_factura = users.id_users and facturas_ventas.id_sucursal =  ".$sucusal.
+$fecha." order by facturas_ventas.id_factura";
 
 $query = mysqli_query($conexion, $consulta2);
 // get the HTML
